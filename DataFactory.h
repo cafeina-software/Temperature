@@ -27,7 +27,7 @@ public:
 	
 	// Device utils
 	static status_t FindThermalDevices(BStringList* outList);
-	BStringList& ThermalDevices() const;
+	const BStringList& ThermalDevices() const;
 	
 	// Application settings
 	void SetActiveDevice(const char* devicePath);

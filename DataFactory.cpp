@@ -119,7 +119,7 @@ status_t DataFactory::FindThermalDevices(BStringList* outList)
 	return B_OK;
 }
 
-BStringList& DataFactory::ThermalDevices()
+const BStringList& DataFactory::ThermalDevices() const
 {
 	return fDevicesList;
 }

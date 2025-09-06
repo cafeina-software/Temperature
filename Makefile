@@ -34,7 +34,8 @@ APP_MIME_SIG = application/x-vnd.Loa-Temperature
 SRCS = \
 	 App.cpp  \
 	 MainWindow.cpp  \
-
+	 DataFactory.cpp \
+	 ThermalDevice.cpp
 
 #	Specify the resource definition files to use. Full or relative paths can be
 #	used.
