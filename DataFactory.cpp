@@ -8,6 +8,7 @@
 #include <StringList.h>
 #include <SupportDefs.h>
 #include "DataFactory.h"
+#include "TemperatureDefs.h"
 
 DataFactory::DataFactory()
 : BArchivable(),
@@ -22,10 +23,10 @@ DataFactory::DataFactory()
 DataFactory::DataFactory(BMessage* from)
 : BArchivable(from)
 {
-	fActiveDevice = from->GetString("device", "");
-	fSecondsToRefresh = from->GetUInt32("window:pulse", 1);
-	fGraphWatermarkShown = from->GetBool("graph:watermark", true);
-	fGraphRunningStatus = from->GetBool("graph:running", true);
+	fActiveDevice = from->GetString(kConfigDevicePath, "");
+	fSecondsToRefresh = from->GetUInt32(kConfigWndPulse, 1);
+	fGraphWatermarkShown = from->GetBool(kConfigGraphWMark, true);
+	fGraphRunningStatus = from->GetBool(kConfigGraphRun, true);
 	
 	DataFactory::FindThermalDevices(&fDevicesList);
 }
@@ -57,14 +58,14 @@ status_t DataFactory::AllUnarchived(const BMessage* archive)
 
 status_t DataFactory::Archive(BMessage* into, bool deep) const
 {
-	if(into->ReplaceString("device", fActiveDevice) != B_OK)
-		into->AddString("device", fActiveDevice);
-	if(into->ReplaceUInt32("window:pulse", fSecondsToRefresh) != B_OK)
-		into->AddUInt32("window:pulse", fSecondsToRefresh);
-	if(into->ReplaceBool("graph:watermark", fGraphWatermarkShown) != B_OK)
-		into->AddBool("graph:watermark", fGraphWatermarkShown);
-	if(into->ReplaceBool("graph:running", fGraphRunningStatus) != B_OK)
-		into->AddBool("graph:running", fGraphRunningStatus);
+	if(into->ReplaceString(kConfigDevicePath, fActiveDevice) != B_OK)
+		into->AddString(kConfigDevicePath, fActiveDevice);
+	if(into->ReplaceUInt32(kConfigWndPulse, fSecondsToRefresh) != B_OK)
+		into->AddUInt32(kConfigWndPulse, fSecondsToRefresh);
+	if(into->ReplaceBool(kConfigGraphWMark, fGraphWatermarkShown) != B_OK)
+		into->AddBool(kConfigGraphWMark, fGraphWatermarkShown);
+	if(into->ReplaceBool(kConfigGraphRun, fGraphRunningStatus) != B_OK)
+		into->AddBool(kConfigGraphRun, fGraphRunningStatus);
 	
 	return BArchivable::Archive(into, deep);
 }

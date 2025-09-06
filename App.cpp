@@ -1,10 +1,11 @@
 #include "App.h"
 #include "MainWindow.h"
+#include "TemperatureDefs.h"
 
 const char *kTemperaturePath = "/dev/power/acpi_thermal/0";
 
 App::App(void)
-	:	BApplication("application/x-vnd.Loa-Temperature")
+	:	BApplication(kTemperatureMime)
 {
 	MainWindow *mainwin = new MainWindow();
 	mainwin->Show();
